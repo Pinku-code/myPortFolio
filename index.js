@@ -9,6 +9,9 @@ const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 8000;
 
+const cors = require('cors');
+app.use(cors());
+
 // PostgreSQL database configuration
 const pool = new Pool({
   user: process.env.DB_USER,
