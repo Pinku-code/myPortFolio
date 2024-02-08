@@ -209,7 +209,9 @@
 
         <section class="about-text">
           <p>
-            Enthusiastic and detail-oriented Computer Science graduate seeking a position as a Backend Node.js Developer. Eager to contribute my skills and knowledge to a dynamic development team and grow in a challenging and collaborative environment.
+            Enthusiastic and detail-oriented Computer Science graduate seeking a position as a Backend Node.js
+            Developer. Eager to contribute my skills and knowledge to a dynamic development team and grow in a
+            challenging and collaborative environment.
           </p>
 
           <p>
@@ -1153,7 +1155,7 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="/" class="form" data-form>
+          <form action="/" class="form" id="myForm" data-form>
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -1193,6 +1195,39 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script>
+    document.getElementById('myForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(Object.fromEntries(formData)),
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+
+          if (responseData.success) {
+            // Display success message to the user
+            alert(responseData.message);
+          } else {
+            // Display error message to the user
+            alert('Failed to submit form data. Please try again.');
+          }
+        } else {
+          console.error('Failed to submit form data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error submitting form data:', error);
+      }
+    });
+  </script>
 
 </body>
 
