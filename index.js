@@ -9,8 +9,6 @@ const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 8000;
 
-const cors = require('cors');
-app.use(cors());
 
 // PostgreSQL database configuration
 const pool = new Pool({
@@ -32,13 +30,7 @@ app.use(express.static(staticPath));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-const response = await fetch('https://abinash-portfolio-eight.vercel.app/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(Object.fromEntries(formData)),
-});
+
 // Handle form submission
 app.post('/', async (req, res) => {
   try {
